@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Visualisation Projects</title>
+  <style>
+    :root {
+      --bg: #f6f7f9; --card: #ffffff; --ink: #1d2433; --muted: #5b6475;
+      --line: #e3e6ec; --accent: #2f6fdb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #11151c; --card: #1a202a; --ink: #e8ebf1; --muted: #9aa3b2; --line: #2a3240; --accent: #6ea1ff; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink);
+           font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    header { max-width: 1100px; margin: 0 auto; padding: 48px 16px 8px; }
+    h1 { margin: 0 0 8px; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.2; }
+    header p { margin: 0; color: var(--muted); max-width: 70ch; }
+    nav { max-width: 1100px; margin: 20px auto 0; padding: 0 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+    nav a { color: var(--accent); text-decoration: none; border: 1px solid var(--line);
+            background: var(--card); padding: 6px 12px; border-radius: 999px; font-size: .9rem; }
+    main { max-width: 1100px; margin: 0 auto; padding: 8px 16px 64px; }
+    section { margin-top: 40px; }
+    h2 { font-size: 1.35rem; margin: 0 0 4px; }
+    section > p { margin: 0 0 16px; color: var(--muted); max-width: 75ch; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr)); }
+    figure { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+             padding: 12px; display: flex; flex-direction: column; }
+    figure img, figure object { width: 100%; height: auto; border-radius: 6px; background: #fff; }
+    figure object { aspect-ratio: 4 / 3; }
+    figure.wide { grid-column: 1 / -1; }
+    figure.wide object { aspect-ratio: 16 / 9; }
+    figcaption { margin-top: 10px; font-size: .92rem; color: var(--muted); }
+    figcaption strong { color: var(--ink); display: block; font-size: 1rem; }
+    code { font-size: .85em; background: var(--line); padding: 1px 5px; border-radius: 4px; }
+    footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 24px 16px 40px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Data Visualisation Projects</h1>
+    <p>Charts and maps built with Python, Matplotlib and Pygal while working through
+      <em>Python Crash Course</em> during my SIWES II training. Pygal charts are interactive:
+      hover over bars and countries to see their values.</p>
+  </header>
+  <nav>
+    <a href="#matplotlib">Matplotlib basics</a>
+    <a href="#walks">Random walks</a>
+    <a href="#dice">Rolling dice</a>
+    <a href="#weather">Weather data (CSV)</a>
+    <a href="#maps">World maps (JSON)</a>
+    <a href="#apis">Web APIs</a>
+  </nav>
+  <main>
+    <section id="matplotlib">
+      <h2>Matplotlib basics</h2>
+      <p>Line graphs and scatter plots with custom titles, labels, line widths and colormaps.</p>
+      <div class="grid">
+        <figure><img src="charts/mpl_squares.png" alt="Line graph of square numbers" loading="lazy">
+          <figcaption><strong>Square numbers</strong>A simple line graph with labelled axes (<code>mpl_squares.py</code>).</figcaption></figure>
+        <figure><img src="charts/scatter_squares.png" alt="Scatter plot of square numbers coloured with a colormap" loading="lazy">
+          <figcaption><strong>Scatter plot with a colormap</strong>1,000 points coloured by their y-value (<code>scatter_squares.py</code>).</figcaption></figure>
+        <figure><img src="charts/cubes_plot.png" alt="Plot of cube numbers" loading="lazy">
+          <figcaption><strong>Cube numbers</strong>The first 5,000 cubes plotted with a colormap (<code>cubes_plot.py</code>).</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="walks">
+      <h2>Random walks</h2>
+      <p>A <code>RandomWalk</code> class generates a path where each step's direction and distance are chosen at random.
+        The start point is green and the end point is red.</p>
+      <div class="grid">
+        <figure><img src="charts/rw_visual.png" alt="Random walk of 50,000 points shaded from light to dark blue" loading="lazy">
+          <figcaption><strong>50,000-point random walk</strong>Points are shaded from light to dark to show the order of the walk (<code>rw_visual.py</code>).</figcaption></figure>
+        <figure><img src="charts/rw_visual2.png" alt="Random walk drawn as a line" loading="lazy">
+          <figcaption><strong>Random walk as a line</strong>The same idea drawn as a continuous path (<code>rw_visual2.py</code>).</figcaption></figure>
+        <figure><object data="charts/rw_visual_pg.svg" type="image/svg+xml" aria-label="Random walk drawn with Pygal"></object>
+          <figcaption><strong>Interactive random walk (Pygal)</strong>An interactive version of the walk (<code>rw_visual_pg.py</code>).</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="dice">
+      <h2>Rolling dice</h2>
+      <p>A <code>Die</code> class simulates rolling dice thousands of times, and histograms show how often each result appears.</p>
+      <div class="grid">
+        <figure><object data="charts/die_visual.svg" type="image/svg+xml" aria-label="Results of rolling one D6 1000 times"></object>
+          <figcaption><strong>One six-sided die</strong>1,000 rolls; every face appears about equally often.</figcaption></figure>
+        <figure><object data="charts/dice_visual.svg" type="image/svg+xml" aria-label="Results of rolling two D6 dice 1000 times"></object>
+          <figcaption><strong>Two six-sided dice</strong>Totals near 7 are most likely.</figcaption></figure>
+        <figure><object data="charts/three_dice.svg" type="image/svg+xml" aria-label="Results of rolling three D6 dice 1000 times"></object>
+          <figcaption><strong>Three six-sided dice</strong>The results start to form a bell curve.</figcaption></figure>
+        <figure><object data="charts/two_d8.svg" type="image/svg+xml" aria-label="Results of rolling two D8 dice 1000 times"></object>
+          <figcaption><strong>Two eight-sided dice</strong>Totals near 9 are most likely.</figcaption></figure>
+        <figure><object data="charts/different_dice_visual.svg" type="image/svg+xml" aria-label="Results of rolling a D6 and a D10 50,000 times"></object>
+          <figcaption><strong>A D6 and a D10</strong>50,000 rolls of dice with different numbers of sides.</figcaption></figure>
+        <figure><img src="charts/die_visual_mp.png" alt="Matplotlib histogram of dice rolls" loading="lazy">
+          <figcaption><strong>Dice rolls with Matplotlib</strong>The same simulation charted with Matplotlib (<code>die_visual_mp.py</code>).</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="weather">
+      <h2>Weather data from CSV files</h2>
+      <p>Daily temperatures read with the <code>csv</code> module and <code>datetime</code>, with missing values handled by exception handling.</p>
+      <div class="grid">
+        <figure class="wide"><img src="charts/highs_lows.png" alt="Daily high and low temperatures for Death Valley in 2014" loading="lazy">
+          <figcaption><strong>Death Valley, California, 2014</strong>Daily highs (red) and lows (blue), with the range between them shaded (<code>highs_lows.py</code>).</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="maps">
+      <h2>World maps from JSON data</h2>
+      <p>Population data loaded from a JSON file, matched to country codes, and drawn on interactive world maps.</p>
+      <div class="grid">
+        <figure class="wide"><object data="charts/world_population.svg" type="image/svg+xml" aria-label="World population in 2010 by country"></object>
+          <figcaption><strong>World population in 2010</strong>Countries grouped by population size (<code>world_population.py</code>).</figcaption></figure>
+        <figure><object data="charts/americas.svg" type="image/svg+xml" aria-label="Map of North, Central and South America"></object>
+          <figcaption><strong>The Americas</strong>North, Central and South America highlighted (<code>americas.py</code>).</figcaption></figure>
+        <figure><object data="charts/na_populations.svg" type="image/svg+xml" aria-label="Populations of countries in North America"></object>
+          <figcaption><strong>North American populations</strong>Canada, Mexico and the United States (<code>na_populations.py</code>).</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="apis">
+      <h2>Data from web APIs</h2>
+      <p>The <code>requests</code> library calls the GitHub API, and the results are charted with clickable bars.</p>
+      <div class="grid">
+        <figure class="wide"><object data="charts/python_repos.svg" type="image/svg+xml" aria-label="Most-starred Python projects on GitHub"></object>
+          <figcaption><strong>Most-starred Python projects on GitHub</strong>Each bar links to the project's repository (<code>python_repos.py</code>).</figcaption></figure>
+        <figure><object data="charts/bar_descriptions.svg" type="image/svg+xml" aria-label="Bar chart with custom tooltips"></object>
+          <figcaption><strong>Custom tooltips</strong>Bars with descriptions and links (<code>bar_descriptions.py</code>).</figcaption></figure>
+      </div>
+    </section>
+  </main>
+  <footer>Ogo-Ayorinde Sharon Olamide · SIWES II · Python Crash Course projects</footer>
+</body>
+</html>
